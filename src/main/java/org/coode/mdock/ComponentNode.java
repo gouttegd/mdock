@@ -36,13 +36,13 @@ import java.beans.VetoableChangeListener;
 
 
 /**
- * Author: Matthew Horridge<br>
- * The University Of Manchester<br>
- * Medical Informatics Group<br>
- * Date: 23-Sep-2006<br><br>
- * <p/>
- * matthew.horridge@cs.man.ac.uk<br>
- * www.cs.man.ac.uk/~horridgm<br><br>
+ * Author: Matthew Horridge
+ * The University Of Manchester
+ * Medical Informatics Group
+ * Date: 23-Sep-2006
+ *
+ * matthew.horridge@cs.man.ac.uk
+ * www.cs.man.ac.uk/~horridgm
  *
  * Developed as part of the CO-ODE project (http://www.co-ode.org)
  *
@@ -184,6 +184,7 @@ public class ComponentNode extends Node {
 
     /**
      * Gets the root component (most likely a tabbed pane)
+     * @return The root component
      */
     public JComponent getComponent() {
         return baseComponent;
@@ -192,7 +193,7 @@ public class ComponentNode extends Node {
 
     /**
      * Gets the number of user components held by this component node.
-     * @return
+     * @return The number of components
      */
     public int getComponentCount() {
         return components.size();
@@ -203,6 +204,7 @@ public class ComponentNode extends Node {
      * Determines if this node is visible.  A component node is defined to
      * be visible if it holds at least one component, otherwise, it is
      * not visible.
+     * @return The visibility
      */
     public boolean isVisible() {
         return getComponentCount() != 0;
@@ -232,6 +234,7 @@ public class ComponentNode extends Node {
 
     /**
      * Gets a list of the component that are held by this component node.
+     * @return The components.
      */
     public List<JComponent> getComponents() {
         return Collections.unmodifiableList(components);

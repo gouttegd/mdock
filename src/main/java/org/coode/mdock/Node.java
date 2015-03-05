@@ -31,13 +31,13 @@ import java.io.PrintWriter;
 
 
 /**
- * Author: Matthew Horridge<br>
- * The University Of Manchester<br>
- * Medical Informatics Group<br>
- * Date: 23-Sep-2006<br><br>
- * <p/>
- * matthew.horridge@cs.man.ac.uk<br>
- * www.cs.man.ac.uk/~horridgm<br><br>
+ * Author: Matthew Horridge
+ * The University Of Manchester
+ * Medical Informatics Group
+ * Date: 23-Sep-2006
+ *
+ * matthew.horridge@cs.man.ac.uk
+ * www.cs.man.ac.uk/~horridgm
  *
  * Developed as part of the CO-ODE project (http://www.co-ode.org)
  */

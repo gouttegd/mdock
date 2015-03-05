@@ -26,16 +26,16 @@ import java.util.*;
 
 
 /**
- * Author: Matthew Horridge<br>
- * The University Of Manchester<br>
- * Medical Informatics Group<br>
- * Date: 23-Sep-2006<br><br>
- * <p/>
- * matthew.horridge@cs.man.ac.uk<br>
- * www.cs.man.ac.uk/~horridgm<br><br>
- * <p/>
+ * Author: Matthew Horridge
+ * The University Of Manchester
+ * Medical Informatics Group
+ * Date: 23-Sep-2006
+ *
+ * matthew.horridge@cs.man.ac.uk
+ * www.cs.man.ac.uk/~horridgm
+ *
  * Developed as part of the CO-ODE project (http://www.co-ode.org)
- * <p/>
+ *
  * A splitter node contains zero or more child nodes.  The child nodes
  * are split in either a vertical or horizontal direction by splitters
  * (splitters are the components that can be dragged about in the UI).
@@ -87,6 +87,9 @@ public abstract class SplitterNode extends Node {
     /**
      * Gets the split of the specified node.  This node
      * must be a child node.
+     * @param node The Node.
+     * @return The split.
+     *
      */
     public double getSplit(Node node) {
         return nodeSplits.get(node);
@@ -131,6 +134,7 @@ public abstract class SplitterNode extends Node {
 
     /**
      * Gets the sum of the visible child node splits.
+     * @return The sum of the splits
      */
     public double getChildSpan() {
         double span = 0.0;
@@ -143,6 +147,7 @@ public abstract class SplitterNode extends Node {
 
     /**
      * Gets a list of visible child nodes.
+     * @return The list of children.
      */
     public List<Node> getVisibleChildren() {
         List<Node> visibleChildren = new ArrayList<Node>();
@@ -281,6 +286,7 @@ public abstract class SplitterNode extends Node {
      * node with the given node.
      * @param insert    The node to be inserted
      * @param after     The node that the inserted node will be split with.
+      *   @param split The weight
      */
     public void insertNodeAfter(Node insert, Node after, double split) {
         addChild(insert, children.indexOf(after) + 1, split);
@@ -290,7 +296,9 @@ public abstract class SplitterNode extends Node {
     /**
      * Inserts a node after (right of or bottom of) a given node by splitting the inserted
      * node with the given node.
-     * @param insert    The node to be inserted
+     * @param insert    The node to be inserted.
+     *                  @param index The index
+     *                               @param split The split
      */
     public void insertNodeAt(Node insert, int index, double split) {
         addChild(insert, index, split);

@@ -28,10 +28,10 @@ import java.awt.*;
 
 
 /**
- * Author: Matthew Horridge<br>
- * The University Of Manchester<br>
- * Bio-Health Informatics Group<br>
- * Date: 01-May-2007<br><br>
+ * Author: Matthew Horridge
+ * The University Of Manchester
+ * Bio-Health Informatics Group
+ * Date: 01-May-2007
  */
 public class UIComponentFactory {
 
@@ -49,6 +49,7 @@ public class UIComponentFactory {
      * Creates the tabbed pane which is used to stack multiple components
      * within a single node.  The default implementation returns an instance
      * of <code>ComponentNodeTabbedPane</code>.
+     * @return The tabbed pane.
      */
     public JTabbedPane createComponentNodeTabbedPane() {
         return new ComponentNodeTabbedPane();
