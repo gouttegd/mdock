@@ -36,10 +36,14 @@
 
 
     <scm>
-        <url>https://mdock.googlecode.com/svn</url>
-        <connection>scm:svn:http://mdock.googlecode.com/svn/trunk/</connection>
-        <developerConnection>scm:svn:https://mdock.googlecode.com/svn/trunk/</developerConnection>
+        <connection>scm:git:git@github.com:matthewhorridge/mdock.git</connection>
+        <developerConnection>scm:git:git@github.com:matthewhorridge/mdock.git</developerConnection>
+        <url>https://github.com/matthewhorridge/mdock</url>
     </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/matthewhorridge/mdock/issues</url>
+    </issueManagement>
 
     <dependencies>
         <dependency>
