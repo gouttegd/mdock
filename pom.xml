@@ -12,7 +12,7 @@
 
     <groupId>com.googlecode.mdock</groupId>
     <artifactId>mdock</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2-SNAPSHOT</version>
 
     <name>mdock</name>
     <description>A lightweight Java component nesting and docking system</description>
