@@ -22,18 +22,12 @@ package org.coode.mdock;
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Document;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ContainerListener;
-import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.util.*;
 import java.util.List;
-import java.beans.VetoableChangeListener;
-
 
 /**
  * Author: Matthew Horridge
@@ -52,13 +46,13 @@ import java.beans.VetoableChangeListener;
  */
 public class ComponentNode extends Node {
 
-    private JTabbedPane tabbedPane;
+    private final JTabbedPane tabbedPane;
 
-    private List<JComponent> components;
+    private final List<JComponent> components;
 
-    private Map<JComponent, String> component2LabelMap;
+    private final Map<JComponent, String> component2LabelMap;
 
-    private JComponent baseComponent;
+    private final JComponent baseComponent;
 
 
     public ComponentNode() {
@@ -80,25 +74,20 @@ public class ComponentNode extends Node {
                 super.removeAll();
             }
         };
-        components = new ArrayList<JComponent>();
-        component2LabelMap = new HashMap<JComponent, String>();
-        tabbedPane = new JTabbedPane() {
+        components = new ArrayList<>();
+        component2LabelMap = new HashMap<>();
+        tabbedPane = UIComponentFactory.getInstance().createComponentNodeTabbedPane();
+        tabbedPane.addContainerListener(new ContainerListener() {
+            @Override
+            public void componentAdded(ContainerEvent e) {
 
-            public void remove(Component component) {
-                ComponentNode.this.remove((JComponent)component);
             }
 
+            @Override
+            public void componentRemoved(ContainerEvent e) {
 
-            public void remove(int index) {
-                super.remove(index);
             }
-
-
-            public void removeAll() {
-                super.removeAll();
-            }
-        };
-        tabbedPane.setFont(new Font("sans-serif", Font.PLAIN, 10));
+        });
         baseComponent.setBorder(UIComponentFactory.getInstance().createComponentNodeBorder());
     }
 
