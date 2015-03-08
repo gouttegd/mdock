@@ -55,7 +55,7 @@ public class ComponentNode extends Node {
 
 
     public ComponentNode() {
-        baseComponent = new JPanel() {
+        baseComponent = new JPanel(new BorderLayout()) {
 
 
             public void remove(Component comp) {
