@@ -2,6 +2,8 @@ package org.coode.mdock;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.plaf.TabbedPaneUI;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 /*
  * Copyright (C) 2007, University of Manchester
@@ -51,8 +53,8 @@ public class UIComponentFactory {
      * of <code>ComponentNodeTabbedPane</code>.
      * @return The tabbed pane.
      */
-    public JTabbedPane createComponentNodeTabbedPane() {
-        return new ComponentNodeTabbedPane();
+    public TabbedPaneUI createComponentNodeTabbedPaneUI() {
+        return new BasicTabbedPaneUI();
     }
 
 

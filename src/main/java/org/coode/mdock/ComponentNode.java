@@ -23,9 +23,8 @@ package org.coode.mdock;
  */
 
 import javax.swing.*;
+import javax.swing.plaf.TabbedPaneUI;
 import java.awt.*;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
 import java.util.*;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class ComponentNode extends Node {
 
 
     public ComponentNode() {
-        baseComponent = new JPanel(new BorderLayout()) {
+        baseComponent = new JPanel() {
 
 
             public void remove(Component comp) {
@@ -76,18 +75,14 @@ public class ComponentNode extends Node {
         };
         components = new ArrayList<>();
         component2LabelMap = new HashMap<>();
-        tabbedPane = UIComponentFactory.getInstance().createComponentNodeTabbedPane();
-        tabbedPane.addContainerListener(new ContainerListener() {
+        TabbedPaneUI tabbedPaneUI = UIComponentFactory.getInstance().createComponentNodeTabbedPaneUI();
+        tabbedPane = new JTabbedPane() {
             @Override
-            public void componentAdded(ContainerEvent e) {
-
+            public void remove(Component component) {
+                ComponentNode.this.remove((JComponent) component);
             }
-
-            @Override
-            public void componentRemoved(ContainerEvent e) {
-
-            }
-        });
+        };
+        tabbedPane.setUI(tabbedPaneUI);
         baseComponent.setBorder(UIComponentFactory.getInstance().createComponentNodeBorder());
     }
 
@@ -95,19 +90,19 @@ public class ComponentNode extends Node {
     /**
      * Adds a component to this node.  If there are multiple components
      * they will be "stacked" in a tabbed pane.
+     *
      * @param component The component to be added
-     * @param label The label for the selection tab which brings the component
-     * to the front if there are multiple components.
+     * @param label     The label for the selection tab which brings the component
+     *                  to the front if there are multiple components.
      */
     public void add(JComponent component, String label) {
         components.add(component);
         component2LabelMap.put(component, label);
-        if(components.size() == 1) {
+        if (components.size() == 1) {
             baseComponent.add(component);
-        }
-        else if(components.size() > 1) {
+        } else if (components.size() > 1) {
             baseComponent.removeAll();
-            for(JComponent c : components) {
+            for (JComponent c : components) {
                 tabbedPane.add(component2LabelMap.get(c), c);
             }
             baseComponent.add(tabbedPane);
@@ -116,7 +111,7 @@ public class ComponentNode extends Node {
 
 //        tabbedPane.add(label, component);
 
-        if(component instanceof NodeComponent) {
+        if (component instanceof NodeComponent) {
             // Notify the component that it was added to us
             ((NodeComponent) component).addedToNode(this);
         }
@@ -125,34 +120,31 @@ public class ComponentNode extends Node {
 
     /**
      * Gets the label for the specified component.
+     *
      * @param component The component whose label is to be
-     * retrieved
+     *                  retrieved
      * @return The label of the specified component, or an
      * empty string if the component isn't held by this component node.
      */
     public String getLabel(JComponent component) {
         String label = component2LabelMap.get(component);
-        if(label != null) {
+        if (label != null) {
             return label;
-        }
-        else {
+        } else {
             return "";
         }
     }
 
-
     public void remove(JComponent component) {
-
         component2LabelMap.remove(component);
         components.remove(component);
 
         baseComponent.removeAll();
         tabbedPane.removeAll();
-        if(components.size() == 1) {
+        if (components.size() == 1) {
             baseComponent.add(components.get(0));
-        }
-        else if(components.size() > 1) {
-            for(JComponent c : components) {
+        } else if (components.size() > 1) {
+            for (JComponent c : components) {
                 tabbedPane.add(component2LabelMap.get(c), c);
             }
             baseComponent.add(tabbedPane);
@@ -164,7 +156,7 @@ public class ComponentNode extends Node {
 
 
     private void removeFromParentIfEmpty() {
-        if(getComponentCount() == 0) {
+        if (getComponentCount() == 0) {
             baseComponent.getParent().remove(baseComponent);
             remove();
         }
@@ -173,6 +165,7 @@ public class ComponentNode extends Node {
 
     /**
      * Gets the root component (most likely a tabbed pane)
+     *
      * @return The root component
      */
     public JComponent getComponent() {
@@ -182,6 +175,7 @@ public class ComponentNode extends Node {
 
     /**
      * Gets the number of user components held by this component node.
+     *
      * @return The number of components
      */
     public int getComponentCount() {
@@ -193,6 +187,7 @@ public class ComponentNode extends Node {
      * Determines if this node is visible.  A component node is defined to
      * be visible if it holds at least one component, otherwise, it is
      * not visible.
+     *
      * @return The visibility
      */
     public boolean isVisible() {
@@ -200,10 +195,9 @@ public class ComponentNode extends Node {
     }
 
     public double getGloballyNormalisedXLocation(Node child) {
-        if(getParent() == null) {
+        if (getParent() == null) {
             return 1.0;
-        }
-        else {
+        } else {
             // Ask our parent
             return getParent().getGloballyNormalisedYLocation();
         }
@@ -223,6 +217,7 @@ public class ComponentNode extends Node {
 
     /**
      * Gets a list of the component that are held by this component node.
+     *
      * @return The components.
      */
     public List<JComponent> getComponents() {
