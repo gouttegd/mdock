@@ -25,10 +25,15 @@ package org.coode.mdock;
 import java.io.Writer;
 import java.io.IOException;
 
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -70,14 +75,13 @@ public class NodeSerialiser {
         this.writer = writer;
     }
 
-    public void serialise() throws ParserConfigurationException, IOException {
-        OutputFormat of = new OutputFormat();
-        of.setIndent(4);
+    public void serialise() throws ParserConfigurationException, IOException, TransformerFactoryConfigurationError, TransformerException {
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         SerialisationNodeVisitor visitor = new SerialisationNodeVisitor(doc, factory);
         node.accept(visitor);
-        XMLSerializer serializer = new XMLSerializer(writer, of);
-        serializer.serialize(doc);
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.transform(new DOMSource(doc), new StreamResult(writer));
     }
 
 

@@ -26,6 +26,9 @@ import org.coode.mdock.*;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+
 import java.util.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -150,6 +153,12 @@ public class ExampleFrame extends JFrame {
             e1.printStackTrace();
         }
         catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        catch (TransformerFactoryConfigurationError e1) {
+            e1.printStackTrace();
+        }
+        catch (TransformerException e1) {
             e1.printStackTrace();
         }
     }
